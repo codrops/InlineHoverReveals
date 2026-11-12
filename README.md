@@ -2,9 +2,11 @@
 
 Some ideas for revealing more about a word in running text, on hover or focus, each section with its own look and motion.
 
+![Some Ideas for Inline Hover Reveals](https://tympanus.net/Demos/InlineHoverReveals/og-image.jpg)
+
 [Article on Codrops](#)
 
-[Demo](#)
+[Demo](https://tympanus.net/Demos/InlineHoverReveals/)
 
 ## Installation
 
