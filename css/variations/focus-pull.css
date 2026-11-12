@@ -1,0 +1,39 @@
+/* 16 Focus Pull: the picture found the way a lens finds it, its lights first, as
+   discs over the paragraph, drawing in to the picture (js/variations/focusPull.js) */
+
+[data-variation='focus-pull'] .card {
+	max-width: none;
+}
+
+/* the picture, 3:2, 303px wide at 1440; a width in threes, so its height is whole px too */
+.focus-pull {
+	position: relative;
+	width: round(clamp(201px, 21vw, 321px), 3px);
+	aspect-ratio: 3 / 2;
+}
+
+/* its canvas, larger than the picture, so its lights can lie over the page beyond
+   its frame; sized and placed around the picture by the script */
+.focus-pull__canvas {
+	position: absolute;
+	display: block;
+	max-width: none;
+}
+
+/* without WebGL 2, the picture as an image */
+.focus-pull__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* the card's text is for screen readers */
+[data-variation='focus-pull'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

@@ -1,0 +1,92 @@
+/* 10 Doors: two little doors cut into the paragraph swing open into the page,
+   a picture set back behind them (js/variations/doors.js) */
+
+[data-variation='doors'] .card {
+	max-width: none;
+}
+
+/* the opening: the picture at the back, the doors in front, seen from straight on;
+   nothing shows outside it */
+.doors {
+	position: relative;
+	overflow: hidden;
+	perspective: 600px;
+}
+
+/* the picture, set into the page: shadowed at its edges, as in a recess */
+.doors__picture {
+	position: absolute;
+	inset: 0;
+	background-position: center;
+	background-size: cover;
+	box-shadow: inset 0 0 18px rgb(0 0 0 / 70%);
+}
+
+/* a door: half the opening, hinged on its outer edge */
+.door {
+	position: absolute;
+	top: 0;
+	width: 50%;
+	height: 100%;
+}
+
+.door--left {
+	left: 0;
+	transform-origin: 0 50%;
+}
+
+.door--right {
+	left: 50%;
+	transform-origin: 100% 50%;
+}
+
+/* its face: the page itself, with the paragraph's own text, darkening with
+   --shade as it turns */
+.door__face {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	background: var(--color-bg);
+}
+
+.door__face::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: #000;
+	opacity: var(--shade, 0);
+}
+
+/* the copy of the block's text, placed by the script over the page's own, its
+   triggers looking as they do on the page (css/base.css) */
+.door__text {
+	position: absolute;
+}
+
+.door__term {
+	white-space: nowrap;
+	text-decoration: underline;
+	text-decoration-thickness: 0.05em;
+	text-underline-offset: 0.14em;
+	text-decoration-color: rgb(255 255 255 / 30%);
+}
+
+[data-trigger='amber'] .door__term {
+	text-decoration: none;
+	color: rgb(var(--glow));
+}
+
+[data-trigger='dim'] .door__term {
+	text-decoration: none;
+	color: var(--color-dim);
+}
+
+/* the card's text is for screen readers */
+[data-variation='doors'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

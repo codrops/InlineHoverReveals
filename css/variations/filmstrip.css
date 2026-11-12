@@ -1,0 +1,74 @@
+/* 04 Filmstrip: the trigger's pictures run as a strip of film across the
+   whole page on its line, behind the text, bent round a drum in WebGL
+   (js/variations/filmstrip.js, js/gl/filmStrip.js); without WebGL, the
+   flat strip of frames below */
+
+/* a frame is 11% of the page high, 158px at 1440, in 3:2 */
+[data-variation='filmstrip'] {
+	--frame-height: round(clamp(96px, 11vw, 200px), 1px);
+}
+
+/* the strips' layer, behind the text, edge to edge across the page */
+.filmstrip {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: calc(-1 * var(--margin));
+	right: calc(-1 * var(--margin));
+	z-index: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+[data-variation='filmstrip'] .block {
+	z-index: 1;
+}
+
+.filmstrip__band {
+	position: absolute;
+	left: 0;
+	height: var(--frame-height);
+	visibility: hidden;
+}
+
+.filmstrip__track {
+	display: flex;
+	gap: 15px;
+	height: 100%;
+}
+
+.filmstrip__frame {
+	position: relative;
+	flex: none;
+	height: 100%;
+	aspect-ratio: 3 / 2;
+	background-position: center;
+	background-size: cover;
+}
+
+/* each frame dimmed, so the text over it stays readable wherever the strip has moved */
+.filmstrip__frame::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: rgb(10 8 9 / 50%);
+}
+
+/* the card is read by screen readers only; the strip is what shows */
+[data-variation='filmstrip'] .card__label,
+[data-variation='filmstrip'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* the strip drawn in WebGL (js/gl/filmStrip.js), the page's width, at the strip's left edge */
+.film-strip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+}

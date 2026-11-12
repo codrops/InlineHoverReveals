@@ -1,0 +1,61 @@
+/* 02 Slow Scan: the picture arrives row by row, grey and overexposed first,
+   the colour a few rows behind, with its caption under it
+   (js/variations/slowScan.js) */
+
+/* a third of the page wide, 450px at 1440 */
+[data-variation='slow-scan'] .card {
+	width: clamp(240px, 31.25vw, 540px);
+	max-width: calc(100vw - 2 * var(--margin));
+}
+
+.scan {
+	position: relative;
+	overflow: hidden;
+}
+
+.scan__row {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+}
+
+.scan__grey,
+.scan__colour {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	background: var(--picture) center / cover no-repeat;
+}
+
+/* the signal before the colour: grey and overexposed, drawn once by js/variations/slowScan.js */
+.scan__grey {
+	background-image: var(--grey);
+}
+
+[data-variation='slow-scan'] .card__label {
+	margin-top: 15px;
+	font-size: var(--size-label);
+	font-weight: var(--weight-text);
+	line-height: var(--leading-label);
+	color: var(--color-text);
+}
+
+[data-variation='slow-scan'] .card__text {
+	font-size: var(--size-small);
+	line-height: var(--leading-small);
+	color: var(--color-strong);
+}
+
+/* over the text, where there's no room beside the paragraph (phones), the
+   caption has a dark backing, which fades in with it */
+[data-variation='slow-scan'] .card:not([data-side='beside']) .card__label {
+	margin-top: 0;
+	padding-top: 15px;
+	background: var(--color-bg);
+}
+
+[data-variation='slow-scan'] .card:not([data-side='beside']) .card__text {
+	padding-bottom: 15px;
+	background: var(--color-bg);
+}

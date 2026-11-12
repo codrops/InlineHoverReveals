@@ -1,0 +1,98 @@
+/* 09 Instant: the trigger takes a picture like an instant camera: a flash, and
+   the photo pushed out from under its line, developing on the page
+   (js/variations/instant.js, js/gl/instantPhoto.js) */
+
+/* the instant film's paper, for the print and the underline it comes out of */
+[data-variation='instant'] {
+	--paper: #e6e1d8;
+	--paper-shade: #d6d0c6;
+}
+
+[data-variation='instant'] .card {
+	max-width: none;
+}
+
+/* the slot: while the photo is being pushed out, only what's out of it shows */
+[data-variation='instant'] .card.is-ejecting {
+	overflow: hidden;
+}
+
+/* the trigger's underline, the camera's slot, in the print's own paper colour
+   so the two read as one thing: drawn as the trigger's
+   background, where the other sections' underlines are, so it can go and fill
+   back in; --line is how much of it shows, 0 to 1, from the left (set by the
+   script) */
+[data-variation='instant'] .term {
+	--line: 1;
+	text-decoration: none;
+	background-image: linear-gradient(var(--paper), var(--paper));
+	background-repeat: no-repeat;
+	background-size: calc(var(--line) * 100%) 0.05em;
+	background-position: 0 calc(100% - 0.12em);
+}
+
+/* the print: the picture in its frame of instant film, wider at the bottom, the
+   paper a warm grey-white, dimmer than the page's whites. Exactly as wide as its
+   trigger (the script sets its width and its border, in proportion) */
+.instant {
+	padding: 9px 9px 36px;
+	background: linear-gradient(170deg, var(--paper), var(--paper-shade));
+	box-shadow:
+		0 2px 4px rgb(0 0 0 / 30%),
+		0 14px 34px rgb(0 0 0 / 45%);
+}
+
+.instant__picture {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 1;
+	overflow: hidden;
+	box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%);
+}
+
+.instant__canvas,
+.instant__image,
+.instant__murk {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.instant__image {
+	object-fit: cover;
+}
+
+/* the flash, going off at the trigger: a burst of white light over the paragraph,
+   under the cards */
+.instant-flash {
+	/* how wide the flash reaches, across: its radius is half this */
+	--flash-size: 360px;
+	position: absolute;
+	z-index: 5;
+	width: var(--flash-size);
+	height: var(--flash-size);
+	margin: calc(var(--flash-size) / -2) 0 0 calc(var(--flash-size) / -2);
+	border-radius: 50%;
+	background: radial-gradient(
+		closest-side,
+		rgb(255 255 255),
+		rgb(255 252 245 / 70%) 15%,
+		rgb(255 248 235 / 25%) 45%,
+		transparent
+	);
+	mix-blend-mode: plus-lighter;
+	pointer-events: none;
+	opacity: 0;
+}
+
+/* the card's text is for screen readers */
+[data-variation='instant'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

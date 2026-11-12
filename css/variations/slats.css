@@ -1,0 +1,83 @@
+/* 14 Slats: the lines above the trigger turn over like a blind's slats, their
+   backs making up the picture (js/variations/slats.js) */
+
+[data-variation='slats'] .card {
+	max-width: none;
+}
+
+/* the blind, seen from straight on; behind the slats, the page, hiding its own
+   text where they turn */
+.slats {
+	position: relative;
+	background: var(--color-bg);
+	perspective: 900px;
+}
+
+/* a slat: one line, turning on its middle */
+.slat {
+	position: absolute;
+	left: 0;
+	right: 0;
+	transform-style: preserve-3d;
+}
+
+.slat__front,
+.slat__back {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	backface-visibility: hidden;
+}
+
+.slat__front {
+	background: var(--color-bg);
+}
+
+.slat__back {
+	background-repeat: no-repeat;
+	transform: rotateX(180deg);
+}
+
+/* darkening as it turns side-on (--shade, set by the script) */
+.slat__front::after,
+.slat__back::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: #000;
+	opacity: var(--shade, 0);
+}
+
+/* the copy of the block's text, placed by the script over the page's own, its
+   triggers looking as they do on the page (css/base.css) */
+.slat__text {
+	position: absolute;
+}
+
+.slat__term {
+	white-space: nowrap;
+	text-decoration: underline;
+	text-decoration-thickness: 0.05em;
+	text-underline-offset: 0.14em;
+	text-decoration-color: rgb(255 255 255 / 30%);
+}
+
+[data-trigger='amber'] .slat__term {
+	text-decoration: none;
+	color: rgb(var(--glow));
+}
+
+[data-trigger='dim'] .slat__term {
+	text-decoration: none;
+	color: var(--color-dim);
+}
+
+/* the card's text is for screen readers */
+[data-variation='slats'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

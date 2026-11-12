@@ -1,0 +1,62 @@
+/* 06 Signal: a note at its trigger tunes in out of static, in the page's
+   colours inverted, dark on a block of the page's light, and the paragraph
+   clears its lines under the block (js/variations/signal.js,
+   js/gl/signalText.js) */
+
+/* as wide as its text (the script keeps it inside the paragraph) */
+[data-variation='signal'] .card {
+	width: max-content;
+}
+
+/* at the cards' text size, 400px wide at 1440, in the page's dark */
+[data-variation='signal'] .card__text {
+	max-width: calc(var(--size-small) * 20);
+	font-size: var(--size-small);
+	line-height: var(--leading-small);
+	color: var(--color-bg);
+}
+
+/* the block under the note, in the page's light (the paragraph's own text
+   colour), under the cards; the script sets where it is, in the paragraph's
+   own coordinates, and --clear fades it in and out with the clearing */
+.signal-patch {
+	position: absolute;
+	z-index: 9;
+	width: calc(var(--clear-r) - var(--clear-l));
+	height: calc(var(--clear-b) - var(--clear-t));
+	translate: var(--clear-l) var(--clear-t);
+	opacity: var(--clear, 0);
+	background: var(--color-strong);
+	pointer-events: none;
+}
+
+/* the static, drawn over the note while it tunes in or breaks up */
+.signal-text {
+	position: absolute;
+	pointer-events: none;
+}
+
+/* The patch the paragraph clears under the block: a band across, faint where
+   the block is, with soft 30px edges outside it, and a band down over the
+   block's whole lines. The paragraph shows wherever it's outside either band,
+   so only where they cross is cleared. --clear is how far it has cleared, 0 to
+   1; the script sets the rest, in the paragraph's own coordinates. */
+[data-variation='signal'] .statement.has-note {
+	--clear-alpha: calc(1 - var(--clear));
+	--band-x: linear-gradient(
+		to right,
+		#000 calc(var(--clear-l) - 30px),
+		rgb(0 0 0 / var(--clear-alpha)) var(--clear-l),
+		rgb(0 0 0 / var(--clear-alpha)) var(--clear-r),
+		#000 calc(var(--clear-r) + 30px)
+	);
+	--band-y: linear-gradient(
+		to bottom,
+		#000 var(--clear-t),
+		rgb(0 0 0 / var(--clear-alpha)) var(--clear-t),
+		rgb(0 0 0 / var(--clear-alpha)) var(--clear-b),
+		#000 var(--clear-b)
+	);
+	-webkit-mask-image: var(--band-x), var(--band-y);
+	mask-image: var(--band-x), var(--band-y);
+}

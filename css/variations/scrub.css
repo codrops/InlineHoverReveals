@@ -1,0 +1,66 @@
+/* 12 Scrub: the trigger holds six frames of one portrait; a small picture above
+   it follows the pointer along it, swinging, and goes through the frames, each
+   one it leaves dropping away, while the trigger's underline fills up to the
+   pointer: a tape, drawn in css/variations/rewind.css (js/variations/scrub.js) */
+
+[data-variation='scrub'] .card {
+	max-width: none;
+}
+
+/* the picture: 2:3, 144px wide at 1440, its frames stacked, one showing; a frame
+   it leaves goes over it as it drops away, out past its edges */
+.scrub {
+	position: relative;
+	width: round(clamp(110px, 10vw, 160px), 1px);
+	aspect-ratio: 2 / 3;
+}
+
+.scrub__frame {
+	position: absolute;
+	inset: 0;
+	border-radius: 4px;
+	background-position: center;
+	background-size: cover;
+	visibility: hidden;
+}
+
+.scrub__frame.is-current {
+	visibility: visible;
+}
+
+.scrub__frame.is-leaving {
+	z-index: 1;
+	visibility: visible;
+}
+
+/* a tick for each frame along the picture's bottom, the one showing lit */
+.scrub__ticks {
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	bottom: 8px;
+	z-index: 2;
+	display: flex;
+	gap: 3px;
+}
+
+.scrub__tick {
+	flex: 1;
+	height: 2px;
+	background: rgb(255 255 255 / 35%);
+	box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+}
+
+.scrub__tick.is-current {
+	background: var(--color-strong);
+}
+
+/* the card's text is for screen readers */
+[data-variation='scrub'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

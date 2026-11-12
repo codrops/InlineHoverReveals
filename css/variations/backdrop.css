@@ -1,0 +1,76 @@
+/* 01 Backdrop: open, the card's figure sweeps in huge and faint on the
+   word's line, with a small caption beside the paragraph
+   (js/variations/backdrop.js) */
+
+/* the figures' layer, behind the text */
+.backdrop {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+}
+
+[data-variation='backdrop'] .block {
+	z-index: 1;
+}
+
+/* twice the size of the show's name, against the section's right */
+.backdrop__figure {
+	position: absolute;
+	right: 0;
+	font-size: calc(var(--size-display) * 2);
+	font-weight: var(--weight-text);
+	line-height: 1;
+	letter-spacing: -0.05em;
+	white-space: nowrap;
+	color: rgb(255 255 255 / 10%);
+	visibility: hidden;
+	opacity: 0;
+}
+
+/* While a caption is open, the paragraph dims: --paragraph, on the section, is
+   how much of it shows, 1 down to the script's settings.dim. By its colour,
+   not its opacity, so its open trigger can stay at full: a trigger shows as
+   much as the paragraph, or more while it's lit (--lit, 0 to 1, on the
+   trigger), and its underline comes up to its own colour as its card opens
+   (--line, 0 to 1). The script tweens them all, so the text and the triggers
+   move together; no CSS transitions here, which would trail behind. */
+[data-variation='backdrop'] .statement {
+	color: color-mix(in srgb, var(--color-strong) calc(var(--paragraph, 1) * 100%), transparent);
+}
+
+[data-variation='backdrop'] .term,
+[data-variation='backdrop'] .term:hover,
+[data-variation='backdrop'] .term.is-open {
+	color: color-mix(in srgb, var(--color-strong) calc(max(var(--paragraph, 1), var(--lit, 0)) * 100%), transparent);
+	text-decoration-color: color-mix(
+		in srgb,
+		currentColor calc(var(--line, 0) * 100%),
+		color-mix(in srgb, rgb(255 255 255 / 30%) calc(var(--paragraph, 1) * 100%), transparent)
+	);
+	transition: none;
+}
+
+/* a narrow caption at the cards' text size, 280px wide at 1440 */
+[data-variation='backdrop'] .card {
+	max-width: min(var(--size-small) * 14, 100vw - 2 * var(--margin));
+}
+
+/* over the word, where there's no room beside the paragraph */
+[data-variation='backdrop'] .card:not([data-side='beside']) {
+	padding: 15px;
+	background: var(--color-bg);
+}
+
+[data-variation='backdrop'] .card__label {
+	font-size: var(--size-label);
+	font-weight: var(--weight-text);
+	line-height: var(--leading-label);
+	color: var(--color-text);
+}
+
+[data-variation='backdrop'] .card__text {
+	font-size: var(--size-small);
+	line-height: var(--leading-small);
+	color: var(--color-strong);
+}

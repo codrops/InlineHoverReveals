@@ -1,0 +1,555 @@
+/* Host Grotesk by Element Type, SIL Open Font License 1.1, see fonts/OFL-HostGrotesk.txt.
+   The only face on the page. Preloaded, and drawn only once it's in, so nothing jumps from a fallback font. */
+@font-face {
+	font-family: 'Host Grotesk';
+	src: url('../fonts/HostGrotesk-Latin.woff2') format('woff2');
+	font-weight: 300 800;
+	font-style: normal;
+	font-display: block;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	/* 15px at the browser default, still scales with the visitor's font size setting */
+	font-size: 93.75%;
+	--color-text: rgb(255 255 255 / 50%);
+	--color-strong: rgb(255 255 255 / 88%);
+	/* one accent, for what a card wants seen */
+	--color-accent: #e23e1d;
+	--color-bg: #30272c;
+	--color-line: rgb(255 255 255 / 12%);
+	--color-link: rgb(255 255 255 / 70%);
+	--color-link-hover: #fff;
+	/* the grey of a dimmed trigger */
+	--color-dim: rgb(255 255 255 / 38%);
+	--font: 'Host Grotesk', sans-serif;
+	/* page margin and column gutter, on a 15px spacing scale: 15, 30, 60, 90, 120, 180, 240 */
+	--margin: 15px;
+	--gutter: 15px;
+	/* The large type hangs from the display size, the show's name on the first
+	   screen: 10vw, 144px at 1440 wide; statements are a quarter of it, with a
+	   floor for phones. The small type takes the sizes of the Codrops demo
+	   Text Character Animations: 13px for the frame and the labels, and the
+	   cards' text at its small-text size, 15px, 20px from 53em. All rounded to
+	   whole pixels, so every line of text sits on a whole pixel. */
+	--size-display: round(clamp(3.7333rem, 10vw, 12.8rem), 1px);
+	--size-statement: round(clamp(1.4667rem, 2.5vw, 2.9333rem), 1px);
+	--leading-statement: round(var(--size-statement) * 1.15, 1px);
+	--size-label: 0.8667rem;
+	--leading-label: round(var(--size-label) * 1.4, 1px);
+	--size-small: 1rem;
+	--leading-small: round(var(--size-small) * 1.3, 1px);
+	/* the medium weight of the display, statements and labels; the frame stays at 400 */
+	--weight-text: 450;
+	/* The ground, fixed to the screen: a room at night lit only by a radio's
+	   dial. A low pink glow rises from the bottom right, a dark plum sits in
+	   the far corner (3DStackMotion's), and a coarse static moves over both,
+	   showing most where the light is */
+	--glow: 208 84 146;
+	--plum: 52 33 56;
+	--bg-layers:
+		radial-gradient(
+			ellipse 70% 60% at 78% 112%,
+			rgba(21, 11, 16, 0.3) 0%,
+			rgb(var(--glow) / 4%) 45%,
+			transparent 90%
+		),
+		radial-gradient(ellipse 60% 55% at 8% -8%, rgba(32, 19, 35, 0.85) 0%, transparent 90%);
+	/* how strong the static is: 0 for none, 1 for the tile as drawn */
+	--static-opacity: 0.06;
+}
+
+/* No elastic bounce past the top or bottom of the page: past its edges there's
+   only the flat ground, and the glow and static would stop in a hard line */
+html,
+body {
+	overscroll-behavior: none;
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: var(--font);
+	font-weight: 400;
+	/* 13px */
+	font-size: 0.8667rem;
+	line-height: 1.4;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* The ground's light, fixed behind everything */
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background-image: var(--bg-layers);
+	background-repeat: no-repeat;
+}
+
+/* The static over the ground: a tile of soft, faintly coloured grain around
+   mid grey, blended with overlay, so it barely touches the black and comes
+   up in the glow. It jumps to a new place twelve times a second, so it never
+   settles, like the hiss between two stations. The box is the screen and
+   clips it, so the grain never shows past the page's edges. */
+.static {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+	mix-blend-mode: overlay;
+	opacity: var(--static-opacity);
+}
+
+.static::before {
+	content: '';
+	position: absolute;
+	/* a tile larger than the screen on every side: room to jump */
+	inset: -256px;
+	background: url(../img/static.png) repeat;
+	background-size: 126px;
+	animation: static 0.8s steps(1) infinite;
+}
+
+@keyframes static {
+	0% {
+		transform: translate(0, 0);
+	}
+	10% {
+		transform: translate(-71px, 38px);
+	}
+	20% {
+		transform: translate(112px, -154px);
+	}
+	30% {
+		transform: translate(-189px, -23px);
+	}
+	40% {
+		transform: translate(47px, 201px);
+	}
+	50% {
+		transform: translate(-133px, 96px);
+	}
+	60% {
+		transform: translate(176px, 61px);
+	}
+	70% {
+		transform: translate(-28px, -212px);
+	}
+	80% {
+		transform: translate(219px, -87px);
+	}
+	90% {
+		transform: translate(-206px, 143px);
+	}
+}
+
+/* still static for visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.static::before {
+		animation: none;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	cursor: pointer;
+}
+
+a:hover {
+	color: var(--color-link-hover);
+}
+
+a:focus-visible,
+button:focus-visible {
+	outline: 2px solid var(--color-link-hover);
+	outline-offset: 2px;
+}
+
+/* A section or the frame, reached from a link, takes the focus without a ring */
+[tabindex='-1']:focus {
+	outline: none;
+}
+
+main {
+	padding: 30px var(--margin) 0;
+	/* cards near the edge never scroll the page sideways */
+	overflow-x: clip;
+}
+
+/* One 12-column grid for the frame and every section, from 53em */
+.frame,
+.variation {
+	display: grid;
+	grid-template-columns: 100%;
+	column-gap: var(--gutter);
+}
+
+/* Codrops frame */
+
+.frame {
+	position: relative;
+	z-index: 1000;
+	grid-template-areas: 'title' 'links' 'tags' 'demos';
+	row-gap: 0.5rem;
+	justify-items: start;
+	pointer-events: none;
+}
+
+/* The Codrops ad, added to the frame on the live site after the page has
+   loaded, out of the flow so nothing moves when it arrives: on phones in
+   the empty space under the frame, on wider screens in the top right corner */
+body #cdawrap {
+	position: absolute;
+	top: calc(100% + 1.5rem);
+	left: 0;
+	max-width: 100%;
+}
+
+.frame a {
+	pointer-events: auto;
+}
+
+/* Links whose underline wipes away on hover */
+.frame a,
+.pager a,
+.end__top {
+	position: relative;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.frame a::before,
+.pager a::before,
+.end__top::before {
+	content: '';
+	height: 1px;
+	width: 100%;
+	background: currentColor;
+	position: absolute;
+	left: 0;
+	top: 92%;
+	transition: transform 0.3s;
+	transform-origin: 0% 50%;
+}
+
+.frame a:hover::before,
+.pager a:hover::before,
+.pager a[aria-current='true']::before,
+.end__top:hover::before {
+	transform: scaleX(0);
+	transform-origin: 100% 50%;
+}
+
+.frame__title,
+.variation__title {
+	grid-area: title;
+	margin: 0;
+	font: inherit;
+	color: var(--color-strong);
+}
+
+.frame__links,
+.frame__tags,
+.frame__demos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 1rem;
+}
+
+.frame__links {
+	grid-area: links;
+}
+
+/* a little more room above the tags than between the other rows: 15px from the links */
+.frame__tags {
+	grid-area: tags;
+	gap: 0.4rem;
+	margin-top: 0.5rem;
+}
+
+/* The tags as pills, a shade lighter than the ground, without the underline */
+.frame__tags a {
+	padding: 0.2rem 0.65rem;
+	border-radius: 999px;
+	background: #5d4b55;
+}
+
+.frame__tags a::before {
+	content: none;
+}
+
+.frame__demos {
+	grid-area: demos;
+	font-variant-numeric: tabular-nums;
+}
+
+/* The variation numbers again, fixed at the top centre once the frame has
+   scrolled away, on a light pane of frosted glass that blurs the text
+   passing under it; the variation on screen is marked */
+.pager {
+	position: fixed;
+	z-index: 1001;
+	top: 18px;
+	left: 0;
+	right: 0;
+	width: max-content;
+	margin-inline: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0 1rem;
+	max-width: calc(100% - 2 * var(--margin));
+	padding: 0.55rem 1.1rem;
+	border-radius: 18px;
+	/* lighter at the top, like light catching the glass, with a soft shadow under it */
+	background: linear-gradient(180deg, rgb(255 255 255 / 15%), rgb(255 255 255 / 6%));
+	box-shadow: 0 10px 30px rgb(0 0 0 / 35%);
+	-webkit-backdrop-filter: blur(14px) saturate(140%);
+	backdrop-filter: blur(14px) saturate(140%);
+	font-variant-numeric: tabular-nums;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-0.6rem);
+	transition:
+		opacity 0.3s ease,
+		transform 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+		visibility 0s 0.5s;
+}
+
+.pager.is-visible {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	transition:
+		opacity 0.3s ease,
+		transform 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+		visibility 0s;
+}
+
+.pager a[aria-current='true'] {
+	color: var(--color-link-hover);
+}
+
+/* The type: a small label over each block, statements set large
+   and tight so a few lines read as one block, and the show's name far
+   bigger than both. One face; the hierarchy comes from size. */
+
+.label {
+	margin: 0 0 15px;
+	font-size: var(--size-label);
+	font-weight: var(--weight-text);
+	line-height: var(--leading-label);
+	color: var(--color-text);
+}
+
+.statement {
+	margin: 0;
+	font-size: var(--size-statement);
+	font-weight: var(--weight-text);
+	line-height: var(--leading-statement);
+	letter-spacing: -0.04em;
+	color: var(--color-strong);
+}
+
+/* The first screen: the show's name, and how the page works on the same baseline */
+
+.intro {
+	min-height: 80svh;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-end;
+	align-items: last baseline;
+	justify-content: space-between;
+	gap: 30px;
+	padding-bottom: 60px;
+}
+
+.intro__name {
+	margin: 0;
+	font-size: var(--size-display);
+	font-weight: var(--weight-text);
+	line-height: 0.9;
+	letter-spacing: -0.045em;
+	white-space: nowrap;
+	/* in the amber of the ground's glow, like the radio dial it comes from */
+	color: rgb(var(--glow));
+}
+
+/* on phones, where the two can't share a line, the hint goes first, so nothing sits under the name */
+.intro__hint {
+	order: -1;
+	width: 100%;
+	margin: 0;
+}
+
+/* A variation: a heading row, then its statement */
+
+/* positioned, for layers a variation sets behind its text */
+.variation {
+	position: relative;
+	min-height: 100svh;
+	align-content: start;
+	row-gap: 120px;
+	padding: 15px 0 180px;
+	border-top: 1px solid var(--color-line);
+}
+
+/* The last variation is only as tall as it needs to be, so the page ends with it */
+.variation:last-of-type {
+	min-height: 0;
+}
+
+.variation__head {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas: 'num title';
+	column-gap: var(--gutter);
+	align-items: baseline;
+}
+
+.variation__num {
+	grid-area: num;
+	font-variant-numeric: tabular-nums;
+}
+
+/* The label, the statement and its cards; the cards are placed against it */
+.block {
+	position: relative;
+}
+
+/* Hover cards. A word in the statement that opens a card (a .term: a
+   trigger) points to it with aria-describedby. js/hoverCards.js places the
+   card above the word, or below it when there's no room above, inside the
+   page margins; each variation's own file in css/variations/ gives the cards
+   their look.
+
+   A trigger looks one of three ways, set on its section with data-trigger:
+   underline (the default), amber or dim. */
+
+.term {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-thickness: 0.05em;
+	text-underline-offset: 0.14em;
+	text-decoration-color: rgb(255 255 255 / 30%);
+	transition:
+		color 0.3s,
+		text-decoration-color 0.3s;
+	/* a word and its card are one thing, so a term never breaks over two lines */
+	white-space: nowrap;
+}
+
+.term:hover,
+.term.is-open {
+	color: inherit;
+	text-decoration-color: currentColor;
+}
+
+/* in the amber of the ground's glow */
+[data-trigger='amber'] .term {
+	text-decoration: none;
+	color: rgb(var(--glow));
+}
+
+/* dimmed against the text, coming up to full when hovered */
+[data-trigger='dim'] .term {
+	text-decoration: none;
+	color: var(--color-dim);
+}
+
+[data-trigger='dim'] .term:hover,
+[data-trigger='dim'] .term.is-open {
+	color: var(--color-strong);
+}
+
+.term:focus-visible {
+	outline-offset: 4px;
+}
+
+.card {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: max-content;
+	max-width: min(300px, 100vw - 2 * var(--margin));
+	/* the cards only show, nothing in them to click, so they never get in the pointer's way */
+	pointer-events: none;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.card__label,
+.card__text {
+	display: block;
+}
+
+/* End of the page */
+
+.end {
+	display: flex;
+	align-items: flex-end;
+	padding: 30px 0;
+	border-top: 1px solid var(--color-line);
+}
+
+@media screen and (min-width: 53em) {
+	:root {
+		--margin: 30px;
+		--gutter: 30px;
+		--size-small: 1.3333rem;
+	}
+	.frame,
+	.variation {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+	}
+	/* title, links and tags down the left, the variations in the centre, the ad on the right */
+	.frame {
+		grid-template-areas:
+			'title title title demos demos demos demos demos demos . . .'
+			'links links links demos demos demos demos demos demos . . .'
+			'tags tags tags demos demos demos demos demos demos . . .';
+		align-items: start;
+	}
+	.frame__demos {
+		justify-self: center;
+		justify-content: center;
+	}
+	.intro__hint {
+		order: 0;
+		width: auto;
+	}
+	body #cdawrap {
+		top: 0;
+		right: 0;
+		left: auto;
+		max-width: calc(25% - var(--gutter));
+		text-align: right;
+	}
+	.variation__head {
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
+		grid-template-areas: none;
+	}
+	.variation__num {
+		grid-column: 1;
+	}
+	.variation__title {
+		grid-column: 2 / 5;
+	}
+	/* the label and statement start under the title, six columns wide */
+	.block {
+		grid-column: 2 / 8;
+	}
+}

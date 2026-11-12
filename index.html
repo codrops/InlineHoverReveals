@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Some Ideas for Inline Hover Reveals | Codrops</title>
+		<meta name="description" content="Some ideas for revealing more about a word in running text, on hover or focus, each section with its own look and motion. Made with GSAP, a few of them with WebGL." />
+		<meta name="keywords" content="hover card, tooltip, popover, link preview, gsap" />
+		<meta name="author" content="Codrops" />
+		<link rel="icon" type="image/svg+xml" href="https://tympanus.net/favicon/favicon.svg" />
+		<link rel="shortcut icon" href="https://tympanus.net/favicon/favicon.ico" />
+		<link rel="preload" href="fonts/HostGrotesk-Latin.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/backdrop.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/slow-scan.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/orbit.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/filmstrip.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/entry.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/signal.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/on-air.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/afterglow.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/instant.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/doors.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/departures.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/scrub.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/rewind.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/slats.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/register.css" />
+		<link rel="stylesheet" type="text/css" href="css/variations/focus-pull.css" />
+		<script>
+			document.documentElement.className = 'js';
+		</script>
+		<!-- Added on the live server only, leave commented out in the repo -->
+		<!--script src="//tympanus.net/codrops/adpacks/analytics.js"></script-->
+	</head>
+	<body>
+		<div class="static" aria-hidden="true"></div>
+		<div id="smooth-wrapper">
+			<div id="smooth-content">
+				<main>
+					<header class="frame" id="top">
+						<h1 class="frame__title">Some Ideas for Inline Hover Reveals</h1>
+						<nav class="frame__links" aria-label="Demo links">
+							<a href="https://tympanus.net/codrops/hub/">All demos</a>
+							<a href="https://github.com/codrops/InlineHoverReveals">GitHub</a>
+						</nav>
+						<nav class="frame__demos" aria-label="Variations">
+							<span class="frame__demos-label">Variations</span>
+							<a class="frame__demo" href="#v01">01</a>
+							<a class="frame__demo" href="#v02">02</a>
+							<a class="frame__demo" href="#v03">03</a>
+							<a class="frame__demo" href="#v04">04</a>
+							<a class="frame__demo" href="#v05">05</a>
+							<a class="frame__demo" href="#v06">06</a>
+							<a class="frame__demo" href="#v07">07</a>
+							<a class="frame__demo" href="#v08">08</a>
+							<a class="frame__demo" href="#v09">09</a>
+							<a class="frame__demo" href="#v10">10</a>
+							<a class="frame__demo" href="#v11">11</a>
+							<a class="frame__demo" href="#v12">12</a>
+							<a class="frame__demo" href="#v13">13</a>
+							<a class="frame__demo" href="#v14">14</a>
+							<a class="frame__demo" href="#v15">15</a>
+							<a class="frame__demo" href="#v16">16</a>
+						</nav>
+						<nav class="frame__tags" aria-label="Tags">
+							<a href="https://tympanus.net/codrops/hub/tag/hover/">#hover</a>
+							<a href="https://tympanus.net/codrops/hub/tag/gsap/">#gsap</a>
+							<a href="https://tympanus.net/codrops/hub/tag/webgl/">#webgl</a>
+							<a href="https://tympanus.net/codrops/hub/tag/glsl/">#glsl</a>
+						</nav>
+					</header>
+					<section class="intro">
+						<div class="intro__show">
+							<p class="label">Late-night radio, midnight to dawn</p>
+							<p class="intro__name">Small Hours</p>
+						</div>
+						<p class="intro__hint">Hover the words that stand out, or tab to them.</p>
+					</section>
+					<section class="variation" id="v01" data-variation="backdrop" data-trigger="underline" aria-labelledby="v01-title">
+						<header class="variation__head">
+							<span class="variation__num">01</span>
+							<h2 class="variation__title" id="v01-title">Backdrop</h2>
+						</header>
+						<div class="block">
+							<p class="label">02:15, line three</p>
+							<p class="statement">
+								Andrés has pulled over before <a class="term" href="#v01-tunnel" aria-describedby="v01-tunnel">the tunnel</a>, the engine running for the heat. Tomorrow is
+								<a class="term" href="#v01-daughter" aria-describedby="v01-daughter">his daughter</a>’s birthday, and he won’t be home for it. He asks for a song she can wake up to,
+								and for <a class="term" href="#v01-weather" aria-describedby="v01-weather">the weather</a> on the other side.
+							</p>
+							<div class="cards">
+								<div class="card" id="v01-tunnel" role="tooltip" data-figure="11.6 km">
+									<span class="card__label">The tunnel</span>
+									<span class="card__text">The longest on his route, 11.6&nbsp;km, and the radio cuts out halfway through</span>
+								</div>
+								<div class="card" id="v01-daughter" role="tooltip" data-figure="7">
+									<span class="card__label">Mila</span>
+									<span class="card__text">Turns seven tomorrow, and wakes at six to the radio her mother leaves on</span>
+								</div>
+								<div class="card" id="v01-weather" role="tooltip" data-figure="−3°">
+									<span class="card__label">The other side</span>
+									<span class="card__text">−3°, snow before morning</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v02" data-variation="slow-scan" data-trigger="amber" aria-labelledby="v02-title">
+						<header class="variation__head">
+							<span class="variation__num">02</span>
+							<h2 class="variation__title" id="v02-title">Slow Scan</h2>
+						</header>
+						<div class="block">
+							<p class="label">03:10, line two</p>
+							<p class="statement">
+								<a class="term" href="#v02-room" aria-describedby="v02-room">A red room</a> open to the desert: that’s where Marta will live one day, she tells the host. Below it,
+								<a class="term" href="#v02-pool" aria-describedby="v02-pool">a pool under an arch</a>. She has drawn the house so many times she could find her way round it in the
+								dark, past the kitchen and up <a class="term" href="#v02-stairs" aria-describedby="v02-stairs">the blue stairs</a> to nothing.
+							</p>
+							<div class="cards">
+								<div class="card" id="v02-room" role="tooltip" data-picture="img/red-room.webp">
+									<span class="card__label">The living room</span>
+									<span class="card__text">Facing west, for the evenings</span>
+								</div>
+								<div class="card" id="v02-pool" role="tooltip" data-picture="img/pool-arch.webp">
+									<span class="card__label">The pool</span>
+									<span class="card__text">Warm all year, nobody else in it</span>
+								</div>
+								<div class="card" id="v02-stairs" role="tooltip" data-picture="img/blue-stairs.webp">
+									<span class="card__label">The stairs</span>
+									<span class="card__text">For sitting on, mostly</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v03" data-variation="orbit" data-trigger="dim" aria-labelledby="v03-title">
+						<header class="variation__head">
+							<span class="variation__num">03</span>
+							<h2 class="variation__title" id="v03-title">Orbit</h2>
+						</header>
+						<div class="block">
+							<p class="label">03:50, line one</p>
+							<p class="statement">
+								Rosa looks after <a class="term" href="#v03-dancers" aria-describedby="v03-dancers">the dancers’ costumes</a> for a theatre that closed in the spring, still pinned for
+								a show that never opened. She can’t sleep, so she has gone in to count the rest:
+								<a class="term" href="#v03-coats" aria-describedby="v03-coats">the winter coats</a> from the last tour, folded away in a trunk that still smells of the sea, and right
+								at the back, <a class="term" href="#v03-suits" aria-describedby="v03-suits">the suits</a> nobody came back for.
+							</p>
+							<div class="cards">
+								<div
+									class="card"
+									id="v03-dancers"
+									role="tooltip"
+									data-pictures="img/orbit/dancer-1.webp img/orbit/dancer-2.webp img/orbit/dancer-3.webp img/orbit/dancer-4.webp img/orbit/dancer-5.webp img/orbit/dancer-6.webp"
+								>
+									<span class="card__label">The dancers’ costumes</span>
+									<span class="card__text">Six of them, cream and white</span>
+								</div>
+								<div
+									class="card"
+									id="v03-coats"
+									role="tooltip"
+									data-pictures="img/orbit/coat-1.webp img/orbit/coat-2.webp img/orbit/coat-3.webp img/orbit/coat-4.webp img/orbit/coat-5.webp img/orbit/coat-6.webp"
+								>
+									<span class="card__label">The winter coats</span>
+									<span class="card__text">Six, in tweed, brown wool and camel</span>
+								</div>
+								<div
+									class="card"
+									id="v03-suits"
+									role="tooltip"
+									data-pictures="img/orbit/suit-1.webp img/orbit/suit-2.webp img/orbit/suit-3.webp img/orbit/suit-4.webp img/orbit/suit-5.webp img/orbit/suit-6.webp"
+								>
+									<span class="card__label">The suits</span>
+									<span class="card__text">Six, from sand to black</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v04" data-variation="filmstrip" data-trigger="underline" aria-labelledby="v04-title">
+						<header class="variation__head">
+							<span class="variation__num">04</span>
+							<h2 class="variation__title" id="v04-title">Filmstrip</h2>
+						</header>
+						<div class="block">
+							<p class="label">04:20, line three</p>
+							<p class="statement">
+								<a class="term" href="#v04-desert" aria-describedby="v04-desert">A red desert film</a> is on in screen one, Lucas tells the host from the projection booth, though
+								nobody came to see it. Next he’ll run <a class="term" href="#v04-summer" aria-describedby="v04-summer">a summer film</a>, all pink walls, pools and sky, the kind nobody
+								makes any more, and last of all, just for himself, <a class="term" href="#v04-print" aria-describedby="v04-print">an old print</a> so faded it looks drawn by hand.
+							</p>
+							<div class="cards">
+								<div
+									class="card"
+									id="v04-desert"
+									role="tooltip"
+									data-pictures="img/film/desert-1.webp img/film/desert-2.webp img/film/desert-3.webp img/film/desert-4.webp img/film/desert-5.webp img/film/desert-6.webp"
+								>
+									<span class="card__label">A red desert film</span>
+									<span class="card__text">Rooms of red stone, open to the desert</span>
+								</div>
+								<div
+									class="card"
+									id="v04-summer"
+									role="tooltip"
+									data-pictures="img/film/summer-1.webp img/film/summer-2.webp img/film/summer-3.webp img/film/summer-4.webp img/film/summer-5.webp img/film/summer-6.webp"
+								>
+									<span class="card__label">A summer film</span>
+									<span class="card__text">Pink walls, blue pools, palm trees</span>
+								</div>
+								<div
+									class="card"
+									id="v04-print"
+									role="tooltip"
+									data-pictures="img/film/print-1.webp img/film/print-2.webp img/film/print-3.webp img/film/print-4.webp img/film/print-5.webp img/film/print-6.webp"
+								>
+									<span class="card__label">An old print</span>
+									<span class="card__text">Lakes, trees and sleepers in two faded inks</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v05" data-variation="entry" data-trigger="dim" aria-labelledby="v05-title">
+						<header class="variation__head">
+							<span class="variation__num">05</span>
+							<h2 class="variation__title" id="v05-title">Entry</h2>
+						</header>
+						<div class="block">
+							<p class="label">04:40, line one</p>
+							<p class="statement">
+								<a class="term" href="#v05-hours" aria-describedby="v05-hours">The small hours</a> are when Valentina writes best. She makes dictionary entries for a living, and
+								tonight she is looking for the right words for <a class="term" href="#v05-dead" aria-describedby="v05-dead">the dead of night</a>, the part the host is in now, when
+								even the gulls have gone quiet.
+							</p>
+							<div class="cards">
+								<div class="card" id="v05-hours" role="tooltip">
+									<span class="card__label">The small hours</span>
+									<span class="card__text">The hours just after midnight, when everyone else is asleep and the night seems to go on longest.</span>
+								</div>
+								<div class="card" id="v05-dead" role="tooltip">
+									<span class="card__label">the dead of night</span>
+									<span class="card__text">The darkest, quietest part of the night, when nothing seems to move at all.</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v06" data-variation="signal" data-trigger="underline" aria-labelledby="v06-title">
+						<header class="variation__head">
+							<span class="variation__num">06</span>
+							<h2 class="variation__title" id="v06-title">Signal</h2>
+						</header>
+						<div class="block">
+							<p class="label">04:50, line two</p>
+							<p class="statement">
+								By <a class="term" href="#v06-skip" aria-describedby="v06-skip">skip</a>, off the night sky, Otto has talked all night to a trawler off Iceland on his own radio. Soon
+								the sky will start to pale, he tells the host, and for half an hour around dawn their voices will ride
+								<a class="term" href="#v06-grey" aria-describedby="v06-grey">the grey line</a>. When it’s over he’ll post the skipper a card, as he has after every contact for fifty
+								years: <a class="term" href="#v06-qsl" aria-describedby="v06-qsl">a QSL card</a>.
+							</p>
+							<div class="cards">
+								<div class="card" id="v06-skip" role="tooltip">
+									<span class="card__text">A signal bouncing off the upper atmosphere and back down, far beyond the horizon. It carries furthest at night.</span>
+								</div>
+								<div class="card" id="v06-grey" role="tooltip">
+									<span class="card__text">The band of twilight that circles the Earth. Along it, at dawn and dusk, a weak signal can reach the other side of the world.</span>
+								</div>
+								<div class="card" id="v06-qsl" role="tooltip">
+									<span class="card__text">The postcard two radio amateurs send each other to prove a contact happened. Otto has kept every one he was sent.</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v07" data-variation="on-air" data-trigger="amber" aria-labelledby="v07-title">
+						<header class="variation__head">
+							<span class="variation__num">07</span>
+							<h2 class="variation__title" id="v07-title">On Air</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:00, before the news</p>
+							<p class="statement">
+								<a class="term" href="#v07-trawler" aria-describedby="v07-trawler">The trawler</a> off Iceland left a message overnight, the host says at five, before the news. So did
+								the night shift at the bakery, a lorry driver, two insomniacs. There’s a birthday wish for <a class="term" href="#v07-mila" aria-describedby="v07-mila">Mila</a>, who
+								turns seven when she wakes up, and a request for <a class="term" href="#v07-song" aria-describedby="v07-song">one more song</a>.
+							</p>
+							<div class="cards">
+								<div class="card" id="v07-trawler" role="tooltip">
+									<span class="card__text">Thanks for the company, Otto. Flat sea all night, nets full. Over and out.</span>
+								</div>
+								<div class="card" id="v07-mila" role="tooltip">
+									<span class="card__text">Happy birthday, Mila. Papá is on the other side of the tunnel, and home by tea.</span>
+								</div>
+								<div class="card" id="v07-song" role="tooltip">
+									<span class="card__text">After the news, says the host. It’s next.</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v08" data-variation="afterglow" data-trigger="underline" aria-labelledby="v08-title">
+						<header class="variation__head">
+							<span class="variation__num">08</span>
+							<h2 class="variation__title" id="v08-title">Afterglow</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:15, line one</p>
+							<p class="statement">
+								Camilo minds the monitors of a motorway hotel overnight, with the radio on. On <a class="term" href="#v08-two" aria-describedby="v08-two">camera two</a>, a woman has
+								been waiting at a red light longer than the light, he tells the host. <a class="term" href="#v08-wash" aria-describedby="v08-wash">The laundrette</a> across the road
+								never closes, and down in the hotel’s <a class="term" href="#v08-pool" aria-describedby="v08-pool">pool</a>, someone is floating on her back.
+							</p>
+							<div class="cards">
+								<div class="card" id="v08-two" role="tooltip" data-picture="img/afterglow/red-light.webp">
+									<span class="card__label">Camera two</span>
+									<span class="card__text">A woman at a red light, in the rain</span>
+								</div>
+								<div class="card" id="v08-wash" role="tooltip" data-picture="img/afterglow/laundrette.webp">
+									<span class="card__label">The laundrette</span>
+									<span class="card__text">One woman waiting for her washing</span>
+								</div>
+								<div class="card" id="v08-pool" role="tooltip" data-picture="img/afterglow/pool.webp">
+									<span class="card__label">The pool</span>
+									<span class="card__text">Someone floating on her back</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v09" data-variation="instant" data-trigger="underline" aria-labelledby="v09-title">
+						<header class="variation__head">
+							<span class="variation__num">09</span>
+							<h2 class="variation__title" id="v09-title">Instant</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:25, line two</p>
+							<p class="statement">
+								Sofía found an instant camera on the night bus, with three pictures tucked in its case, and nobody has come for it. In one,
+								<a class="term" href="#v09-waiting" aria-describedby="v09-waiting">someone waiting</a> on the yellow seats at the depot; in another,
+								<a class="term" href="#v09-picnic" aria-describedby="v09-picnic">a picnic</a> on a white sheet; in the last, a girl in
+								<a class="term" href="#v09-jumper" aria-describedby="v09-jumper">a striped jumper</a>, not smiling for whoever took it. If its owner is listening, she says, it’s at the
+								depot, under the counter.
+							</p>
+							<div class="cards">
+								<div class="card" id="v09-waiting" role="tooltip" data-picture="img/instant/depot.webp">
+									<span class="card__text">Someone waiting on yellow seats under a neon light, at night</span>
+								</div>
+								<div class="card" id="v09-picnic" role="tooltip" data-picture="img/instant/picnic.webp">
+									<span class="card__text">A woman lying on a white sheet in the grass, by a basket of flowers</span>
+								</div>
+								<div class="card" id="v09-jumper" role="tooltip" data-picture="img/instant/jumper.webp">
+									<span class="card__text">A girl in a striped jumper and a yellow cardigan, against a wall</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v10" data-variation="doors" data-trigger="dim" aria-labelledby="v10-title">
+						<header class="variation__head">
+							<span class="variation__num">10</span>
+							<h2 class="variation__title" id="v10-title">Doors</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:35, line three</p>
+							<p class="statement">
+								<a class="term" href="#v10-yellow" aria-describedby="v10-yellow">A yellow stone</a> on a grey one was the first, Nicolás tells the host, balanced on the sand while the
+								tide was out, for the early walkers to find. By the lifeguards’ tower, where the sand is harder, he stood
+								<a class="term" href="#v10-red" aria-describedby="v10-red">a red slab</a> on its end; it fell twice and took him most of an hour. The hardest he finished just before he
+								called: <a class="term" href="#v10-blue" aria-describedby="v10-blue">five blue stones</a>, stacked against the wind. By noon the sea will have taken them all.
+							</p>
+							<div class="cards">
+								<div class="card" id="v10-yellow" role="tooltip" data-picture="img/doors/yellow.webp">
+									<span class="card__text">A yellow stone balanced on a grey one</span>
+								</div>
+								<div class="card" id="v10-red" role="tooltip" data-picture="img/doors/red.webp">
+									<span class="card__text">A slab of stone with one red face, standing on its end</span>
+								</div>
+								<div class="card" id="v10-blue" role="tooltip" data-picture="img/doors/blue.webp">
+									<span class="card__text">Five blue stones stacked into a leaning tower</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v11" data-variation="departures" data-trigger="amber" aria-labelledby="v11-title">
+						<header class="variation__head">
+							<span class="variation__num">11</span>
+							<h2 class="variation__title" id="v11-title">Departures</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:45, line two</p>
+							<p class="statement">
+								Ximena sweeps the station overnight, and from the concourse she reads the host the board as it changes:
+								<a class="term" href="#v11-first" aria-describedby="v11-first">the first train</a> is already boarding,
+								<a class="term" href="#v11-mail" aria-describedby="v11-mail">the mail train</a> is late again, and
+								<a class="term" href="#v11-night" aria-describedby="v11-night">the night train</a> from the north is just coming in, ten minutes early, for once.
+							</p>
+							<div class="cards">
+								<div class="card" id="v11-first" role="tooltip">
+									<span class="card__text">Cádiz</span>
+								</div>
+								<div class="card" id="v11-mail" role="tooltip">
+									<span class="card__text">Delayed</span>
+								</div>
+								<div class="card" id="v11-night" role="tooltip">
+									<span class="card__text">Bilbao</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v12" data-variation="scrub" data-trigger="underline" aria-labelledby="v12-title">
+						<header class="variation__head">
+							<span class="variation__num">12</span>
+							<h2 class="variation__title" id="v12-title">Scrub</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:50, line two</p>
+							<p class="statement">
+								Pilar runs the photo lab by the station, open all night. Tonight’s rolls are all portraits, six frames of each, as if nobody could choose:
+								<a class="term" href="#v12-orange" aria-describedby="v12-orange">a boy with an orange</a> on the salt flats,
+								<a class="term" href="#v12-yellow" aria-describedby="v12-yellow">a woman in yellow</a> who blinked in only one, and
+								<a class="term" href="#v12-red" aria-describedby="v12-red">one in red</a>, holding something round that catches the light.
+							</p>
+							<div class="cards">
+								<div
+									class="card"
+									id="v12-orange"
+									role="tooltip"
+									data-frames="img/scrub/orange-1.webp img/scrub/orange-2.webp img/scrub/orange-3.webp img/scrub/orange-4.webp img/scrub/orange-5.webp img/scrub/orange-6.webp"
+								>
+									<span class="card__text">Six portraits of a young man in a blue shirt on white salt flats, playing with an orange</span>
+								</div>
+								<div
+									class="card"
+									id="v12-yellow"
+									role="tooltip"
+									data-frames="img/scrub/yellow-1.webp img/scrub/yellow-2.webp img/scrub/yellow-3.webp img/scrub/yellow-4.webp img/scrub/yellow-5.webp img/scrub/yellow-6.webp"
+								>
+									<span class="card__text">Six portraits of a woman in a yellow jumper in the desert, holding a small silver ball; in one, her eyes are closed</span>
+								</div>
+								<div
+									class="card"
+									id="v12-red"
+									role="tooltip"
+									data-frames="img/scrub/red-1.webp img/scrub/red-2.webp img/scrub/red-3.webp img/scrub/red-4.webp img/scrub/red-5.webp img/scrub/red-6.webp"
+								>
+									<span class="card__text">Six portraits of a woman in a red blouse in the desert, holding a glass globe</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v13" data-variation="rewind" data-trigger="underline" aria-labelledby="v13-title">
+						<header class="variation__head">
+							<span class="variation__num">13</span>
+							<h2 class="variation__title" id="v13-title">Rewind</h2>
+						</header>
+						<div class="block">
+							<p class="label">05:58, line one</p>
+							<p class="statement">
+								Paloma is copying the family’s old tapes before the machine gives out, and she keeps winding them back and forth:
+								<a class="term" href="#v13-birthday" aria-describedby="v13-birthday">her brother’s birthday</a>, the year their mother had to blow the candle out for him,
+								<a class="term" href="#v13-dandelion" aria-describedby="v13-dandelion">the dandelion</a> she filmed for a whole minute when she was nine, and
+								<a class="term" href="#v13-dive" aria-describedby="v13-dive">the dive</a> their father still swears was perfect.
+							</p>
+							<div class="cards">
+								<div class="card" id="v13-birthday" role="tooltip" data-tape="img/tapes/candle.webp" data-columns="8" data-rows="5">
+									<span class="card__text">Home video: a mother blows out the candle on her little boy’s birthday cake</span>
+								</div>
+								<div class="card" id="v13-dandelion" role="tooltip" data-tape="img/tapes/dandelion.webp" data-columns="8" data-rows="5">
+									<span class="card__text">Home video: a dandelion in a meadow, its seeds blown away by the wind</span>
+								</div>
+								<div class="card" id="v13-dive" role="tooltip" data-tape="img/tapes/dive.webp" data-columns="8" data-rows="5">
+									<span class="card__text">Home video: a man in a swimming cap dives into an outdoor pool and swims under the water</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v14" data-variation="slats" data-trigger="amber" aria-labelledby="v14-title">
+						<header class="variation__head">
+							<span class="variation__num">14</span>
+							<h2 class="variation__title" id="v14-title">Slats</h2>
+						</header>
+						<div class="block">
+							<p class="label">06:05, line two</p>
+							<p class="statement">
+								Aurora works nights at the film archive, checking old reels frame by frame before they are copied, and she keeps the best ones in her head to tell the host about.
+								Tonight there was <a class="term" href="#v14-dancer" aria-describedby="v14-dancer">a dancer alone</a> on a lit stage in front of an empty house, then
+								<a class="term" href="#v14-couple" aria-describedby="v14-couple">a couple</a> holding each other under a single lamp in a hall nobody had swept for years, and, last of
+								all, <a class="term" href="#v14-red" aria-describedby="v14-red">a girl in red</a> turning and turning in the rain.
+							</p>
+							<div class="cards">
+								<div class="card" id="v14-dancer" role="tooltip" data-picture="img/slats/dancer.webp">
+									<span class="card__text">A film still: a dancer alone in a spotlight on a stage, in front of empty seats</span>
+								</div>
+								<div class="card" id="v14-couple" role="tooltip" data-picture="img/slats/couple.webp">
+									<span class="card__text">A film still: a couple holding each other under a single lamp in an empty hall</span>
+								</div>
+								<div class="card" id="v14-red" role="tooltip" data-picture="img/slats/red.webp">
+									<span class="card__text">A film still: a girl in a red dress turning in the rain under a streetlight</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v15" data-variation="register" data-trigger="underline" aria-labelledby="v15-title">
+						<header class="variation__head">
+							<span class="variation__num">15</span>
+							<h2 class="variation__title" id="v15-title">Register</h2>
+						</header>
+						<div class="block">
+							<p class="label">06:15, last call</p>
+							<p class="statement">
+								The last caller of the night is Irene, who takes every picture three times, through red, green and blue glass, the way the first colour photographers did. Last week it
+								was <a class="term" href="#v15-portrait" aria-describedby="v15-portrait">her sister</a> in an orange jumper, standing so still for all three that the plates met
+								perfectly, then <a class="term" href="#v15-terrace" aria-describedby="v15-terrace">a pink terrace</a> by a pool, on a day without a breath of wind. Tonight it is
+								<a class="term" href="#v15-sculpture" aria-describedby="v15-sculpture">a sculpture</a> she can’t stop looking at, and she is laying its plates over each other in the
+								dark, waiting for the colour to come back. Outside the studio window, it already has.
+							</p>
+							<div class="cards">
+								<div class="card" id="v15-portrait" role="tooltip" data-picture="img/plates/portrait.webp">
+									<span class="card__text">A woman in an orange jumper against a blue wall</span>
+								</div>
+								<div class="card" id="v15-terrace" role="tooltip" data-picture="img/plates/terrace.webp">
+									<span class="card__text">Pink steps and white stones by a pale blue pool, palm trees behind</span>
+								</div>
+								<div class="card" id="v15-sculpture" role="tooltip" data-picture="img/plates/sculpture.webp">
+									<span class="card__text">A sculpture of folded coral, pink and green layers</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="variation" id="v16" data-variation="focus-pull" data-trigger="amber" aria-labelledby="v16-title">
+						<header class="variation__head">
+							<span class="variation__num">16</span>
+							<h2 class="variation__title" id="v16-title">Focus Pull</h2>
+						</header>
+						<div class="block">
+							<p class="label">06:30, signing off</p>
+							<p class="statement">
+								That was the last call. From the studio window the host can see
+								<a class="term" href="#v16-lamps" aria-describedby="v16-lamps">the street lamps</a> still burning along the avenue, though the sky no longer needs them. Down at the
+								harbour, <a class="term" href="#v16-cranes" aria-describedby="v16-cranes">the cranes</a> have kept their lights on all night, and
+								<a class="term" href="#v16-tram" aria-describedby="v16-tram">the first tram</a> is crossing the bridge with every window lit and nobody aboard yet. To everyone who
+								called, and everyone who only listened: thank you for staying up. Small Hours is back at midnight.
+							</p>
+							<div class="cards">
+								<div class="card" id="v16-lamps" role="tooltip" data-picture="img/focus/street-lamps.webp">
+									<span class="card__text">An empty avenue before dawn, two rows of orange street lamps running to a pale sky</span>
+								</div>
+								<div class="card" id="v16-cranes" role="tooltip" data-picture="img/focus/cranes.webp">
+									<span class="card__text">Harbour cranes at first light, their lamps mirrored in still water</span>
+								</div>
+								<div class="card" id="v16-tram" role="tooltip" data-picture="img/focus/tram.webp">
+									<span class="card__text">A lit tram crossing an iron bridge over a river at dawn</span>
+								</div>
+							</div>
+						</div>
+					</section>
+					<footer class="end">
+						<a class="end__top" href="#top">Back to top</a>
+					</footer>
+				</main>
+			</div>
+		</div>
+		<script src="js/gsap.min.js"></script>
+		<script src="js/ScrollTrigger.min.js"></script>
+		<script src="js/ScrollSmoother.min.js"></script>
+		<script src="js/SplitText.min.js"></script>
+		<script type="module" src="js/index.js"></script>
+	</body>
+</html>

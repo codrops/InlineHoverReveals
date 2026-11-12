@@ -1,0 +1,53 @@
+/* 13 Rewind: a picture in an old screen's shape above the trigger, its video
+   following the pointer along the trigger, whose underline fills as the tape
+   (js/variations/rewind.js) */
+
+[data-variation='rewind'] .card {
+	max-width: none;
+}
+
+/* the picture, 288px wide at 1440, 4:3, in the rounded, slightly bulging shape
+   of an old screen (the clip path the script adds) */
+.tv {
+	position: relative;
+	width: round(clamp(220px, 20vw, 320px), 1px);
+}
+
+.tv__screen {
+	position: relative;
+	aspect-ratio: 4 / 3;
+	-webkit-clip-path: url(#tv-screen);
+	clip-path: url(#tv-screen);
+}
+
+.tv__picture {
+	position: absolute;
+	inset: 0;
+	background-repeat: no-repeat;
+}
+
+/* the tape: the trigger's underline, drawn as the trigger's own background so it
+   can fill: one line, grey, with white painted into it up to where the video is
+   (--tape, 0 to 1, set by the script, js/follow.js). It sits where the other
+   sections' underlines do, 0.05em thick. 12 Scrub's triggers are tapes too */
+[data-variation='rewind'] .term,
+[data-variation='scrub'] .term {
+	--tape: 0;
+	text-decoration: none;
+	background-image: linear-gradient(#fff, #fff), linear-gradient(rgb(255 255 255 / 30%), rgb(255 255 255 / 30%));
+	background-repeat: no-repeat;
+	background-size:
+		calc(var(--tape) * 100%) 0.05em,
+		100% 0.05em;
+	background-position: 0 calc(100% - 0.12em);
+}
+
+/* the card's text is for screen readers */
+[data-variation='rewind'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

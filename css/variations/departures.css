@@ -1,0 +1,91 @@
+/* 11 Departures: the note on a split-flap board that follows the pointer, as
+   On Air's tag does (js/variations/departures.js, js/follow.js). The boards
+   live in a layer fixed to the screen, outside the page's scrolling content */
+
+/* the boards' layer, fixed to the screen over the page and under the bar of numbers */
+.departures-layer {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	pointer-events: none;
+}
+
+.departures-layer .card {
+	max-width: none;
+	transform-origin: 0 0;
+}
+
+/* the row: tiles at the paragraph's size, as tall as its line, in a dark housing */
+.board {
+	--tile-height: calc(var(--leading-statement) - 4px);
+	display: flex;
+	gap: 2px;
+	padding: 2px;
+	border-radius: 4px;
+	background: #0d0b0c;
+	font-size: var(--size-statement);
+}
+
+/* a tile: two halves with a thin split between them, and the two flaps that turn
+   over them (the script turns them about the split) */
+.flap {
+	position: relative;
+	width: 0.6em;
+	height: var(--tile-height);
+	perspective: 6em;
+}
+
+.flap__half {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: calc(50% - 0.5px);
+	overflow: hidden;
+	backface-visibility: hidden;
+}
+
+.flap__top {
+	top: 0;
+	border-radius: 3px 3px 0 0;
+	background: linear-gradient(#25201f, #1c1819);
+	transform-origin: 50% calc(100% + 0.5px);
+}
+
+.flap__bottom {
+	bottom: 0;
+	border-radius: 0 0 3px 3px;
+	background: linear-gradient(#1a1617, #141112);
+	transform-origin: 50% -0.5px;
+}
+
+/* the letter, as tall as the tile, each half showing its own half of it */
+.flap__letter {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: var(--tile-height);
+	font-size: 0.78em;
+	font-weight: var(--weight-text);
+	line-height: var(--tile-height);
+	letter-spacing: 0;
+	text-align: center;
+	color: #ece5d9;
+}
+
+.flap__top .flap__letter {
+	top: 0;
+}
+
+.flap__bottom .flap__letter {
+	bottom: 0;
+}
+
+/* the card's text is for screen readers */
+.departures-layer .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

@@ -1,0 +1,75 @@
+/* 03 Orbit: the pictures form a 3D ring around the trigger that turns
+   without end (js/variations/orbit.js) */
+
+/* a picture is 5.5% of the page wide, 79px at 1440, in 4:5 */
+[data-variation='orbit'] {
+	--orbit-width: round(clamp(70px, 7vw, 140px), 1px);
+}
+
+[data-variation='orbit'] .card {
+	max-width: none;
+}
+
+/* the stage, sized by the script to hold the ring, with the perspective it's seen in */
+.orbit {
+	position: relative;
+	perspective: 900px;
+}
+
+/* the ring's centre, tipped towards the viewer so it's seen from slightly above */
+.orbit__tilt {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: rotateX(calc(-1 * var(--tilt)));
+	transform-style: preserve-3d;
+}
+
+.orbit__ring,
+.orbit__slot {
+	position: absolute;
+	transform-style: preserve-3d;
+}
+
+/* a picture, centred on its place round the ring */
+.orbit__item {
+	position: absolute;
+	top: calc(var(--orbit-width) * -0.625);
+	left: calc(var(--orbit-width) * -0.5);
+	width: var(--orbit-width);
+	aspect-ratio: 4 / 5;
+	transform-style: preserve-3d;
+}
+
+/* the photo on both faces, each shown only from its own side, darkened as it turns away */
+.orbit__face {
+	position: absolute;
+	inset: 0;
+	background: var(--picture) center / cover no-repeat;
+	border-radius: 2px;
+	backface-visibility: hidden;
+}
+
+.orbit__face--back {
+	transform: rotateY(180deg);
+}
+
+.orbit__face::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: #000;
+	opacity: var(--shade, 0);
+}
+
+/* the card's label and text are for screen readers */
+[data-variation='orbit'] .card__label,
+[data-variation='orbit'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

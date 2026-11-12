@@ -1,0 +1,60 @@
+/* 05 Entry: the trigger's words rise out of the paragraph and become a
+   title, with a smaller description right under it, while the rest of the
+   text fades and blurs (js/variations/entry.js) */
+
+/* how faint and blurred the rest of the text gets while a card is open;
+   js/variations/entry.js reads these too, so the words match it */
+[data-variation='entry'] {
+	--fade: 0.12;
+	--blur: 6px;
+}
+
+/* the rest of the text, faint and blurred while a card is open. It comes back
+   into focus as the trigger's words fall back in: in the same time
+   (--fall-duration, set by the script from its fallDuration) and on the
+   same curve, GSAP's power3.inOut */
+[data-variation='entry'] .statement,
+[data-variation='entry'] .block > .label {
+	transition:
+		opacity var(--fall-duration, 0.5s) cubic-bezier(0.76, 0, 0.24, 1),
+		filter var(--fall-duration, 0.5s) cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+[data-variation='entry'] .block.is-reading .statement,
+[data-variation='entry'] .block.is-reading > .label {
+	opacity: var(--fade);
+	filter: blur(var(--blur));
+	transition:
+		opacity 0.5s,
+		filter 0.5s;
+}
+
+/* as wide as its title or its description, whichever is wider (the script keeps it inside the paragraph) */
+[data-variation='entry'] .card {
+	width: max-content;
+}
+
+/* the title, the trigger's own words, at the statement's size */
+[data-variation='entry'] .card__label {
+	font-size: var(--size-statement);
+	font-weight: var(--weight-text);
+	line-height: var(--leading-statement);
+	letter-spacing: -0.04em;
+}
+
+/* in the trigger's grey, a little apart from the description */
+[data-variation='entry'] .card__label {
+	margin-bottom: 15px;
+	color: var(--color-dim);
+}
+
+/* the description, smaller, at the cards' text size, and always in lower case, like the title can be */
+[data-variation='entry'] .card__text {
+	/* narrower than the column: 400px at 1440, 300px on phones */
+	max-width: calc(var(--size-small) * 20);
+	font-size: var(--size-small);
+	line-height: var(--leading-small);
+	letter-spacing: -0.02em;
+	text-transform: lowercase;
+	color: var(--color-link);
+}

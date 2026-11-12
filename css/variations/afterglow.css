@@ -1,0 +1,94 @@
+/* 08 Afterglow: a small screen comes on above the trigger and its light spills
+   onto the page (js/variations/afterglow.js) */
+
+/* the light, set by the script: how strong (0 off, 1 on) and its colour, on the
+   section for its letters (below) and on the room's layer; and its centre */
+[data-variation='afterglow'],
+.afterglow-light {
+	--light: 0;
+	--light-r: 255;
+	--light-g: 230;
+	--light-b: 200;
+	--light-colour: rgb(var(--light-r) var(--light-g) var(--light-b));
+}
+
+[data-variation='afterglow'] {
+	--tint-x: 0px;
+	--tint-y: 0px;
+}
+
+/* the light in the room, lightening the ground behind the text in the screen's colour: a
+   layer of its own, fixed to the whole screen (is-screen) or filling the element the
+   script's settings.room names */
+.afterglow-light {
+	--glow-x: 50%;
+	--glow-y: 50%;
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: radial-gradient(
+		circle 55vw at var(--glow-x) var(--glow-y),
+		rgb(var(--light-r) var(--light-g) var(--light-b) / calc(var(--light) * 0.3)),
+		transparent 70%
+	);
+	mix-blend-mode: screen;
+}
+
+.afterglow-light.is-screen {
+	position: fixed;
+}
+
+/* the light in the letters: the words near the screen take on its colour */
+[data-variation='afterglow'] .statement {
+	--tint: color-mix(in srgb, var(--light-colour) calc(var(--light) * 65%), rgb(255 255 255 / 88%));
+	background-image: radial-gradient(circle 360px at var(--tint-x) var(--tint-y), var(--tint), rgb(255 255 255 / 88%));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+/* the trigger's underline, which follows the text's colour elsewhere */
+[data-variation='afterglow'] .term:hover,
+[data-variation='afterglow'] .term.is-open {
+	text-decoration-color: var(--color-strong);
+}
+
+[data-variation='afterglow'] .card {
+	max-width: none;
+}
+
+/* the screen: 16:9, 288px wide at 1440, with faint scan lines and a glow of its own light */
+.afterglow {
+	position: relative;
+	width: round(clamp(200px, 20vw, 320px), 1px);
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border-radius: 4px;
+	box-shadow: 0 0 40px rgb(var(--light-r) var(--light-g) var(--light-b) / calc(var(--light) * 0.35));
+}
+
+.afterglow__picture {
+	position: absolute;
+	inset: 0;
+	background-position: center;
+	background-size: cover;
+}
+
+.afterglow::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 18%) 0 1px, transparent 1px 3px);
+	pointer-events: none;
+}
+
+/* the card's label and text are for screen readers */
+[data-variation='afterglow'] .card__label,
+[data-variation='afterglow'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

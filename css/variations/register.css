@@ -1,0 +1,51 @@
+/* 15 Register: the picture as three plates, its red, green and blue, gliding into
+   register over the trigger (js/variations/register.js) */
+
+[data-variation='register'] {
+	--fringe: 0;
+}
+
+[data-variation='register'] .card {
+	max-width: none;
+}
+
+/* the plates, 4:5, 216px wide at 1440, laid over each other; screen adds their
+   channels back up to the picture, and where they don't meet, each shows its own
+   colour. isolate keeps the adding among the plates, not the page behind */
+.register {
+	position: relative;
+	width: round(clamp(170px, 15vw, 240px), 1px);
+	aspect-ratio: 4 / 5;
+	isolation: isolate;
+}
+
+.register__plate {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	mix-blend-mode: screen;
+}
+
+/* the paragraph's letters fringing red and blue as the plates lock (--fringe, in
+   px, set by the script); the trigger keeps its own look */
+[data-variation='register'] .statement {
+	text-shadow:
+		calc(var(--fringe) * -1px) 0 rgb(255 60 60 / calc(var(--fringe) * 0.16)),
+		calc(var(--fringe) * 1px) 0 rgb(60 140 255 / calc(var(--fringe) * 0.16));
+}
+
+[data-variation='register'] .term {
+	text-shadow: none;
+}
+
+/* the card's text is for screen readers */
+[data-variation='register'] .card__text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
