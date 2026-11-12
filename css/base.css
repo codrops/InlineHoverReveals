@@ -206,16 +206,6 @@ main {
 	pointer-events: none;
 }
 
-/* The Codrops ad, added to the frame on the live site after the page has
-   loaded, out of the flow so nothing moves when it arrives: on phones in
-   the empty space under the frame, on wider screens in the top right corner */
-body #cdawrap {
-	position: absolute;
-	top: calc(100% + 1.5rem);
-	left: 0;
-	max-width: 100%;
-}
-
 .frame a {
 	pointer-events: auto;
 }
@@ -529,13 +519,6 @@ body #cdawrap {
 	.intro__hint {
 		order: 0;
 		width: auto;
-	}
-	body #cdawrap {
-		top: 0;
-		right: 0;
-		left: auto;
-		max-width: calc(25% - var(--gutter));
-		text-align: right;
 	}
 	.variation__head {
 		grid-column: 1 / -1;

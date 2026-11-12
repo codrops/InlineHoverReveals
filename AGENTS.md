@@ -9,7 +9,7 @@ One page, `index.html`. The first screen shows the name of a late-night radio sh
 `js/index.js` wires the page:
 
 - **Smooth scroll**: ScrollSmoother (`smooth: 1`), off with reduced motion.
-- **Frame**: the title, links and tags down the left, the variation numbers in the centre; on the live site the Codrops ad (`#cdawrap`) lands top right, out of the flow on desktop so nothing moves when it arrives.
+- **Frame**: the title, links and tags down the left, the variation numbers in the centre. The analytics, the Codrops ad (`#cdawrap`) and the ad's CSS are added on the live server only, never in this repo.
 - **Bar of numbers**: `.pager`, a copy of the frame's variation links fixed at the top centre once the frame has scrolled away, with the current section marked (`aria-current`), on a light pane of frosted glass.
 - **Hint**: on touch screens it says to tap the words.
 - **Cards**: set up once the fonts are in (`document.fonts.ready`), since the looks measure the text.
