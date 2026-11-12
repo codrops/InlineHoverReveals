@@ -10,7 +10,7 @@
 // a grey layer and a colour layer; only opacity and transforms animate. The
 // grey picture is drawn once per picture, not filtered in every row.
 
-import {isHidden, urlOf} from '../hoverCards.js';
+import {isHidden, loaded, urlOf} from '../hoverCards.js';
 
 const settings = {
     // the height of a row, in px
@@ -41,7 +41,7 @@ const greyOf = src => {
     if (!greys.has(src)) {
         const image = new Image();
         image.src = src;
-        const grey = image.decode().then(() => {
+        const grey = loaded(image).then(() => {
             const canvas = document.createElement('canvas');
             canvas.width = image.naturalWidth;
             canvas.height = image.naturalHeight;

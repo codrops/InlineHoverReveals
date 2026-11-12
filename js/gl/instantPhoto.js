@@ -9,6 +9,7 @@
 // left the camera first (else its bottom edge); render() draws it. Without WebGL the
 // picture shows as an image under a murky layer that fades away.
 
+import {loaded} from '../hoverCards.js';
 import {SQUARE, positionsOf, programOf, textureOf} from './program.js';
 
 const settings = {
@@ -102,7 +103,7 @@ export class InstantPhoto {
         const gl = canvas.getContext('webgl');
         if (gl) this.#setUpGl(canvas, gl);
         else this.#setUpFallback();
-        this.ready = this.image.decode().then(() => this.#upload());
+        this.ready = loaded(this.image).then(() => this.#upload());
     }
 
     get works() {

@@ -18,6 +18,7 @@
 // It's drawn in WebGL 2, which keeps a picture of any size with its smaller copies,
 // the ones that blur it. Without WebGL 2 the picture is an image that fades in.
 
+import {loaded} from '../hoverCards.js';
 import {programOf, textureOf} from './program.js';
 
 const settings = {
@@ -215,10 +216,7 @@ export class FocusPicture {
         const gl = canvas.getContext('webgl2', {premultipliedAlpha: true, antialias: false});
         if (gl) this.#setUpGl(canvas, gl);
         else this.#setUpFallback();
-        this.ready = this.image
-            .decode()
-            .then(() => this.#upload())
-            .catch(() => {});
+        this.ready = loaded(this.image).then(() => this.#upload());
     }
 
     get works() {

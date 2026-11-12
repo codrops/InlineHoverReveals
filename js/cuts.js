@@ -12,8 +12,8 @@ import {bounds, pageMargin} from './hoverCards.js';
 // paragraph (with even, a width in even px, to halve). Just above the trigger's line if there are
 // enough lines there, else just below it; else fewer, two at least, on whichever side has more of
 // them. Where none of that fits on screen, fallback says: 'screen', full size on whichever side
-// has more room on screen, past the paragraph's text; 'lines', as many lines as there are on
-// whichever side has more. Across, centred on the trigger, inside the paragraph and the screen's
+// has more room on screen, past the paragraph's text; 'lines', as many of the paragraph's lines as
+// are on screen, on whichever side has more of them. Across, centred on the trigger, inside the paragraph and the screen's
 // margins. Returns {left, top, width, height, count, lineHeight, side}, side 'top' or 'bottom'.
 export const cutFor = (term, statement, {height: least, aspect, even = false, fallback}) => {
     const root = document.documentElement;
@@ -41,8 +41,14 @@ export const cutFor = (term, statement, {height: least, aspect, even = false, fa
         else if (fallback === 'screen') {
             side = topOf('top', rows) + rows * lineHeight - roof >= floor - topOf('bottom', rows) ? 'top' : 'bottom';
         } else {
-            side = sides[0];
-            count = Math.max(1, Math.min(rows, room[side]));
+            // as many of the paragraph's lines as are on screen, on whichever side has more of them
+            const onScreen = s => {
+                let n = 0;
+                while (n < Math.min(rows, room[s]) && fits(s, n + 1)) n++;
+                return n;
+            };
+            side = onScreen('bottom') > onScreen('top') ? 'bottom' : 'top';
+            count = Math.max(1, onScreen(side));
         }
     }
 

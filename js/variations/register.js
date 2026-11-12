@@ -13,7 +13,7 @@
 // of its own; laid over each other with mix-blend-mode: screen, they add back
 // up to the picture.
 
-import {isHidden, oneTweenEach, pageMargin, reducedMotion, urlOf} from '../hoverCards.js';
+import {isHidden, loaded, oneTweenEach, pageMargin, reducedMotion, urlOf} from '../hoverCards.js';
 import {alongTrigger} from '../follow.js';
 
 const settings = {
@@ -117,10 +117,7 @@ export const register = {
             card.prepend(box);
             const image = new Image();
             image.src = urlOf(card.dataset.picture);
-            image
-                .decode()
-                .then(() => separate(image, canvases))
-                .catch(() => {});
+            loaded(image).then(() => separate(image, canvases));
             plates.set(card, canvases);
         });
     },

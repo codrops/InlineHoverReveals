@@ -9,6 +9,7 @@
 // px; wear, how much wear shows (0 to 1). The canvas is the page's width and
 // the strip's height, inside the strip, at its left edge.
 
+import {loaded} from '../hoverCards.js';
 import {positionsOf, programOf, textureOf} from './program.js';
 
 const settings = {
@@ -211,7 +212,7 @@ export class FilmStrip {
             sources.map(src => {
                 const image = new Image();
                 image.src = src;
-                return image.decode().then(() => image);
+                return loaded(image).then(() => image);
             }),
         ).then(images => {
             const max = gl.getParameter(gl.MAX_TEXTURE_SIZE);

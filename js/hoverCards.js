@@ -45,6 +45,20 @@ export const isHidden = el => getComputedStyle(el).visibility === 'hidden';
 // wherever it's used: a url() in a custom property, for one, resolves against the stylesheet using it
 export const urlOf = path => new URL(path, document.baseURI).href;
 
+// A picture ready to draw: decoded, or, when the browser turns decoding down (an EncodingError,
+// which it can give for a picture that's fine), once it has loaded
+export const loaded = image =>
+    image.decode().catch(error => {
+        if (image.complete) {
+            if (image.naturalWidth) return;
+            throw error;
+        }
+        return new Promise((resolve, reject) => {
+            image.addEventListener('load', resolve, {once: true});
+            image.addEventListener('error', () => reject(error), {once: true});
+        });
+    });
+
 // The page's side margins, in px
 export const pageMargin = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--margin'));
 

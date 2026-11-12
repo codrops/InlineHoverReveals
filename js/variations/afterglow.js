@@ -15,7 +15,7 @@
 // properties set here place and colour them; while the light is on, its centre
 // follows the screen on every frame, so it stays with it as the page scrolls.
 
-import {isHidden, oneTweenEach, reducedMotion, urlOf} from '../hoverCards.js';
+import {isHidden, loaded, oneTweenEach, reducedMotion, urlOf} from '../hoverCards.js';
 
 const settings = {
     // switching on: the dot drawing out into a line, then the line opening into the picture, in seconds
@@ -134,7 +134,7 @@ export const afterglow = {
             screens.set(card, state);
             const image = new Image();
             image.src = src;
-            image.decode().then(() => (state.colour = lightOf(image)));
+            loaded(image).then(() => (state.colour = lightOf(image)));
         });
     },
     open(card, {section}) {
